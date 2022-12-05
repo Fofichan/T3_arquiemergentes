@@ -29,11 +29,19 @@ Al momento de implementar la instancia EC2 de AWS, presentó intermitencia impid
 ### PUT Location
 ![PUT Location BY ID](putlocation.png)
 
-### PUT Location location_id
+### PUT Location por location_id
 ![PUT Location BY location_id](getsensor.png)
 
+### DELETE Location
+![DELETE Location By location_id](deletelocation.png)
 
+### POST Sensor_data (No se inserta timestamp, por ende, no se realiza la inserción)
+![POST Sensor_data](postsensor1.png)
 
+### POST Sensor_data (*201 CREATED*)
+![POST Sensor_data](postsensor2.png)
 
+### GET Sensor_data 
+![GET Sensor_data](getsensordata.png)
 
 
