@@ -1,5 +1,7 @@
 # T3_arquiemergentes
 
-Tarea de API para Arquitecturas emergentes:
+## Integrantes:
+- Christian Bastias 
+- Joaquín Neira
 
-Enlace a API
+Enlace a API: [Click Aquí](https://link-url-here.org)
