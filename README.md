@@ -18,11 +18,22 @@ Al momento de implementar la instancia EC2 de AWS, presentó intermitencia impid
 ![GET Location](GETLOCATION.png)
 
 ### GET Location por location_id
-![GET Location by id](GETUNOLOCATION.png)
+![GET Location by location_id](GETUNOLOCATION.png)
 
 ### GET Sensor
 ![GET Sensor](getallsensor.png)
 
 ### GET Sensor por sensor_id
-![GET Location BY ID](getsensor.png)
+![GET Location BY sensor_id](getsensor.png)
+
+### PUT Location
+![PUT Location BY ID](putlocation.png)
+
+### PUT Location location_id
+![PUT Location BY location_id](getsensor.png)
+
+
+
+
+
 
