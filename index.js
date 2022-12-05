@@ -246,35 +246,45 @@ app.post("/api/v1/sensor_data/:sensor_api_key/:sensor_id", (req, res, next) => {
 })
 
 
-/// get sensor_data //
-app.get("/api/v1/sensor_data/:company_api_key", (req, res, next) => {
-    var Data= {
-        to : req.body.to,
-        from : req.body.from,
-        sensor_id : req.body.sensor_id
-    }
-    console.log(Data.sensor_id);
-    for(var value in Data.sensor_id){
-        console.log(Data.sensor_id[value]);
-        var sql = "select value,timestamp, Sensor_Data.sensor_id from Sensor_Data, Company, Location, Sensor where  Sensor_Data.timestamp >= ? AND Sensor_Data.timestamp <= ? AND Sensor.sensor_id =? AND Sensor.location_id=Sensor.sensor_id and  Location.location_id = Sensor.location_id and Company.ID = Location.company_id and Company.company_api_key = ?  "
-        var params = [Data.from,Data.to,Data.sensor_id[value],req.params.company_api_key]
-        db.all(sql, params, (err, row) => {
-            if (err) {
-            res.status(400).json({"error":err.message});
-            return;
-            }
-            console.log(row);
-        });
+/////// GET sensor data ///////////////////
 
-    }
-    
+app.get("/api/v1/sensor_data/:company_api_key", async (req, res, next) => {
+  var Data = {
+    to: req.body.to,
+    from: req.body.from,
+    sensor_id: req.body.sensor_id,
+  };
+  var tmp = [];
+
+  for (var value in Data.sensor_id) {
+    var sql = `select value,timestamp, Sensor_Data.sensor_id 
+                from Sensor_Data, Company, Location, Sensor 
+                where  Sensor_Data.timestamp >= ? 
+                AND Sensor_Data.timestamp <= ? 
+                And Sensor_Data.sensor_id = ?
+                AND Sensor.sensor_id = Sensor_Data.sensor_id 
+                and  Location.location_id = Sensor.location_id 
+                and Company.ID = Location.company_id 
+                and Company.company_api_key = ?`;
+    var params = [
+      Data.from,
+      Data.to,
+      Data.sensor_id[value],
+      req.params.company_api_key,
+    ];
+    const val = await dball(sql, params);
+    tmp.push(val);
+  }
+  res.json({
+    message: "success",
+    data: tmp,
+  });
 });
-
-
-
-
 
 // Default response for any other request
-app.use(function(req, res){
-    res.status(404);
+app.use(function (req, res) {
+  res.status(404);
 });
+
+
+
